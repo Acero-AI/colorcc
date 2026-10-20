@@ -11,7 +11,7 @@ R = pathlib.Path(__file__).resolve().parent.parent / "results"
 SWEEPS = {"Apple M5 Pro": "m5/m5pro_sheet.json", "RTX 3070": "rtx3070/sheet.json", "A100 PCIe": "a100-pcie/sheet.json"}
 COPIES = {"Apple M5 Pro": "m5/e2e.json", "RTX 3070": "rtx3070/e2e.json", "A100 PCIe": "a100-pcie/e2e.json"}
 LIBS = {"RTX 3070": ["rtx3070/nvidia.json"], "A100 PCIe": ["a100-pcie/nvidia.json"]}
-IDEAS = [("plain four stages", "gpu:base", "joins:base"), ("+ warp vote (runs)", "gpu:+runs", "joins:+runs"),
+IDEAS = [("plain, first three stages", "gpu:base", "joins:base"), ("+ warp vote (runs)", "gpu:+runs", "joins:+runs"),
          ("+ skip joins", "gpu:+skip", "joins:+skip"), ("+ path halving", "gpu:+halve", "joins:+halve"),
          ("all three", "gpu:all-packed", "joins:all-packed"), ("+ numbering (the full call)", "gpu:all+n", None)]
 
@@ -68,7 +68,8 @@ def main():
             ratio = lambda a, b: f"{a['time'] / b['time']:.1f}x" if "time" in a and "time" in b else "–"
             body.append([str(g["dpi"]), f"{g['mpx']:.0f}", ms(o.get("time")), ms(c.get("time")), ratio(c, o),
                          mb(o.get("peak")), mb(c.get("peak")), mb(n.get("peak")), ms(o4.get("time")), ms(cv.get("time")), ratio(o4, cv)])
-        out += [f"### Against NVIDIA's libraries, {gpu}", "",
+        note = " (earlier benchmark; small-size ratios approximate)" if "A100" in gpu else ""
+        out += [f"### Against NVIDIA's libraries, {gpu}{note}", "",
                 table(["dpi", "MP", "ours", "cuCIM", "cuCIM / ours", "memory: ours", "cuCIM", "NPP", "ours, 4 nbrs", "CV-CUDA, 4 nbrs", "ours4 / CV-CUDA"], body), ""]
     print("\n".join(out))
 

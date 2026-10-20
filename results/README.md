@@ -12,11 +12,10 @@ post and in the README comes from a file in this folder, and the tables below ar
 
 On an RTX 3070, with the picture already on the GPU:
 
-- The full 806-megapixel sheet takes **89 ms**.
-- **5.4x faster than NVIDIA cuCIM** on a 3-megapixel render, falling to **1.7x** on the full sheet. Same regions,
-  same GPU memory (cuCIM also needs a 32-bit copy of a colour picture first; colorcc reads RGB).
-- **Half the GPU memory of NVIDIA NPP** beyond its input, at every size NPP could run (907 MB against 455 MB at
-  300 dpi). NPP's labels were wrong at every one of those sizes, so it is not a speed reference.
+- The full 806-megapixel sheet takes **89 ms** (706 ms counting the copies in and out).
+- **1.7x faster than NVIDIA cuCIM** on the full sheet, rising to 5.4x on a 3-megapixel render, where cuCIM's
+  fixed per-call cost dominates. Same regions, same GPU memory (cuCIM also needs a 32-bit copy of a colour picture first; colorcc reads RGB).
+- **NVIDIA NPP** gave wrong labels at every size, so it is not a reference (it also used twice the memory).
 - **NVIDIA CV-CUDA** only joins 4 neighbours, and there it is 1.6–1.9x *faster* than colorcc's 4-neighbour mode.
 
 On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core of the same Mac (2.59 s).
@@ -35,7 +34,7 @@ On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core
 
 |  | time | joins |
 |---|---|---|
-| plain four stages | 715.3 ms | 3.21 billion |
+| plain, first three stages | 715.3 ms | 3.21 billion |
 | + warp vote (runs) | 205.0 ms | 2.43 billion |
 | + skip joins | 302.6 ms | 0.81 billion |
 | + path halving | 207.3 ms | 3.21 billion |
@@ -46,7 +45,7 @@ On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core
 
 |  | time | joins |
 |---|---|---|
-| plain four stages | 143.9 ms | 3.21 billion |
+| plain, first three stages | 143.9 ms | 3.21 billion |
 | + warp vote (runs) | 120.6 ms | 2.43 billion |
 | + skip joins | 199.3 ms | 0.81 billion |
 | + path halving | 89.9 ms | 3.21 billion |
@@ -57,7 +56,7 @@ On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core
 
 |  | time | joins |
 |---|---|---|
-| plain four stages | 90.4 ms | 3.21 billion |
+| plain, first three stages | 90.4 ms | 3.21 billion |
 | + warp vote (runs) | 69.3 ms | 2.43 billion |
 | + skip joins | 89.3 ms | 0.81 billion |
 | + path halving | 67.9 ms | 3.21 billion |
@@ -76,7 +75,7 @@ On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core
 | 600 | 454 | 49.6 ms | 91.9 ms | 1.9x | 1.82 GB | 1.82 GB | 3.63 GB | 48.7 ms | 30.2 ms | 1.6x |
 | 800 | 806 | 88.9 ms | 151.5 ms | 1.7x | 3.24 GB | 3.23 GB | – | 86.8 ms | – | – |
 
-### Against NVIDIA's libraries, A100 PCIe
+### Against NVIDIA's libraries, A100 PCIe (earlier benchmark; small-size ratios approximate)
 
 | dpi | MP | ours | cuCIM | cuCIM / ours | memory: ours | cuCIM | NPP | ours, 4 nbrs | CV-CUDA, 4 nbrs | ours4 / CV-CUDA |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -88,12 +87,15 @@ On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core
 | 600 | 454 | 39.1 ms | 86.3 ms | 2.2x | 1.82 GB | 1.82 GB | 3.63 GB | 27.9 ms | – | – |
 | 800 | 806 | 48.9 ms | 133.2 ms | 2.7x | 3.24 GB | 3.23 GB | – | 47.8 ms | – | – |
 
-
 ## How it was measured
 
 Every time is the median wall-clock time between two GPU synchronisations, after a warm-up, with the picture
 already on the GPU unless a column says copies are included. `bench/bench.py` (the sweep: the first two kinds of
 table) takes the median of 10 calls, 5 at 600 and 800 dpi; cc3d's, 5, and 2 above 60 megapixels.
+The "each idea" rows time the first three stages; numbering, the fourth, is added on the last row. Every
+timing comes from one synthetic sheet (`bench/synth_sheet.py`), mostly paper; pictures with less background will
+behave differently. cc3d's times in `rtx3070/sheet.json` (50 s at 800 dpi) come from the rented box's shared server
+CPU and are not quoted; the cc3d reference is one core of the M5 Pro (2.59 s).
 `bench/nvidia.py` (the library comparison) runs each library in its own process, warms it up for at least half a
 second so the GPU is at its working clock, and takes the median of 5 calls (3 at 600 and 800 dpi). NPP, cuCIM and
 CV-CUDA get the picture already packed into one 32-bit number per pixel before the clock starts, the RGB picture
