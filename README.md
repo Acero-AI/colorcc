@@ -154,7 +154,7 @@ used as ground truth in the tests and as baselines in the benchmarks.
 [`tests/test_colorcc.py`](https://github.com/Acero-AI/colorcc/blob/main/tests/test_colorcc.py) compares every flag combination, 4 and 8 neighbours, with and
 without an ignored colour, against cc3d: the same labels, value for value, on ten test images (noise,
 checkerboards, one-pixel diagonals, a spiral, single rows and columns and others), plus a test that labels a large
-image many times to catch races. All 285 tests pass on an RTX 3070 against the released wheel ([`results/rtx3070/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/rtx3070/tests.txt)), and passed on an Apple M5 Pro one commit earlier ([`results/m5/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/m5/tests.txt); the Metal kernels are unchanged since). In every benchmark the labels were also identical to cc3d at every size.
+image many times to catch races. All 285 tests pass on an RTX 3070 against the released wheel ([`results/rtx3070/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/rtx3070/tests.txt)) and on an Apple M5 Pro against colorcc 0.1.1 installed from PyPI ([`results/m5/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/m5/tests.txt)). In every benchmark the labels were also identical to cc3d at every size.
 
 ## Development
 

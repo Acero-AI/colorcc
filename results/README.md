@@ -106,7 +106,7 @@ counted). Copies to and from the GPU depend on the machine's PCIe link, about 10
 | folder | machine | what |
 |---|---|---|
 | `rtx3070/` | RTX 3070 8 GB, driver 580, CUDA 13.0, PyTorch 2.14.1, CuPy 14.2.0, NPP 13.0.1, cuCIM 26.10.0, CV-CUDA 0.18.0 | the published wheel, installed fresh: `tests.txt` (285 passed), `sheet.json` (sweep), `nvidia.json` (comparison), `e2e.json` (copies), `freeze.txt` (every package version); `warmup-check/`: the same comparison with a one-call warm-up, which left the GPU below its working clock at the smallest sizes |
-| `m5/` | Apple M5 Pro | `m5pro_sheet.json` (sweep), `e2e.json`, `tests.txt` (285 passed one commit before the final change to the Python launcher; the Metal kernels are unchanged since) |
+| `m5/` | Apple M5 Pro | `m5pro_sheet.json` (sweep), `e2e.json`, `tests.txt` (285 passed, colorcc 0.1.1 installed from PyPI) |
 | `a100-pcie/` | A100 PCIe 40 GB, driver 595, CUDA 13.2 | `sheet.json`, `e2e.json`, `nvidia.json`, `tests.txt`, from an earlier version of the package and of `nvidia.py` (which timed cuCIM through PyTorch's allocator); on one RTX 3070 that benchmark version's cuCIM ratios were within 1% at 200 to 600 dpi but up to 20% high at 50 and 100 dpi, so the A100's small-size ratios are approximate |
 | `rtx3070-profile/` | RTX 3070 | `layouts.json`: the join-order profile (`bench/profile.py`) behind "joining the row above first is about 10x faster" |
 | `earlier/` | two earlier RTX 3070 runs | before the pure-Python launcher and the fixed comparison; kept for the record |

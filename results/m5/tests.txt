@@ -1,8 +1,9 @@
-Tue Oct 20 12:15:47 UTC 2026
+Tue Oct 20 22:44:24 UTC 2026
 ProductName:		macOS ProductVersion:		26.5.1 BuildVersion:		25F80 
 Apple M5 Pro
 torch 2.14.1 mps True
-tree: colorcc-oss b35ab07, installed with pip install --no-build-isolation ., run as: pytest tests
-........................................................................ [ 75%]
+colorcc /Users/frozenwolf/ccl-blog/.venv/lib/python3.12/site-packages/colorcc/__init__.py
+Version: 0.1.1
+tests: v0.1.1 (the PyPI release)
 .....................................................................    [100%]
-285 passed in 27.80s
+285 passed in 46.57s
