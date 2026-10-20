@@ -9,15 +9,14 @@ Exact region labels for RGB images in PyTorch, on NVIDIA and Apple GPUs.
 [![PyPI](https://img.shields.io/pypi/v/colorcc)](https://pypi.org/project/colorcc/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://pypi.org/project/colorcc/)
 [![test](https://github.com/Acero-AI/colorcc/actions/workflows/test.yml/badge.svg)](https://github.com/Acero-AI/colorcc/actions/workflows/test.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/Acero-AI/colorcc/blob/main/LICENSE)
 
 **[How it works, with live figures: read the post on the Fablnx engineering blog →](https://blogs.fablnx.com/posts/every-colour/)**
 
-<img src="docs/hero.png" alt="A drawing and colorcc's labels: every region of every colour" width="100%">
+<img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/hero.png" alt="A drawing and colorcc's labels: every region of every colour" width="100%">
 
 </div>
 
-> [!TIP]
 > **New here?** [*Every colour at once*](https://blogs.fablnx.com/posts/every-colour/) builds this labeller from
 > scratch: union-find, warps, atomics, why the white paper of a drawing is the hardest region of all, and how it
 > compares with NVIDIA's libraries. Every figure is live, and no GPU background is needed.
@@ -28,7 +27,7 @@ Most connected-component labellers (OpenCV, SciPy, cuCIM's binary mode) see blac
 construction drawings in particular, are made of many exact colours, with anti-aliased edges in between. colorcc
 gives every exact colour its own regions, in one pass over the image, with no loop over colours:
 
-<img src="docs/colour-vs-binary.png" alt="The same pixels: a black-and-white labeller makes all ink one region; colorcc separates each exact colour" width="100%">
+<img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/colour-vs-binary.png" alt="The same pixels: a black-and-white labeller makes all ink one region; colorcc separates each exact colour" width="100%">
 
 Two pixels belong to the same region when they touch (4 or 8 neighbours) and have exactly the same RGB value.
 Labels run 1..n in raster order of each region's first pixel, so the output is identical, value for value, to
@@ -61,7 +60,7 @@ img = torch.from_numpy(rgb).to("cuda")                          # or "mps"
 labels, n = colorcc.label(img, conn=8, ignore=(255, 255, 255))  # labels: [H, W] int32, 1..n; paper 0
 ```
 
-[`examples/label_png.py`](examples/label_png.py) does this and saves the regions as a colour-coded PNG
+[`examples/label_png.py`](https://github.com/Acero-AI/colorcc/blob/main/examples/label_png.py) does this and saves the regions as a colour-coded PNG
 (`pip install pillow`):
 
 ```bash
@@ -82,17 +81,16 @@ The same sheet takes 151 ms on an Apple M5 Pro (17x faster than cc3d on one CPU 
 cuCIM gives the same regions in the same memory; NPP splits regions at every size it ran. NVIDIA's CV-CUDA only
 joins 4 neighbours, and there it is 1.6–1.9x *faster* than colorcc's 4-neighbour mode.
 
-> [!NOTE]
-> Every number, at every size, with the machines, versions and method: [`results/README.md`](results/README.md).
+> **Every number**, at every size, with the machines, versions and method: [`results/README.md`](https://github.com/Acero-AI/colorcc/blob/main/results/README.md).
 > The same data as live charts, with what each idea is worth: [chapter 9 of the post](https://blogs.fablnx.com/posts/every-colour/#c9).
 
 ## How it works
 
-<img src="docs/four-stages.gif" alt="The four stages, thread by thread, with the CUDA kernel line each thread runs" width="100%">
+<img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/four-stages.gif" alt="The four stages, thread by thread, with the CUDA kernel line each thread runs" width="100%">
 
-Four stages, the same CUDA ([`colorcc/cuda/kernels.cu`](colorcc/cuda/kernels.cu)) and Metal
-([`colorcc/metal/kernels.metal`](colorcc/metal/kernels.metal)) code line for line, launched by one Python function
-(`_stages` in [`colorcc/__init__.py`](colorcc/__init__.py)) on either GPU:
+Four stages, the same CUDA ([`colorcc/cuda/kernels.cu`](https://github.com/Acero-AI/colorcc/blob/main/colorcc/cuda/kernels.cu)) and Metal
+([`colorcc/metal/kernels.metal`](https://github.com/Acero-AI/colorcc/blob/main/colorcc/metal/kernels.metal)) code line for line, launched by one Python function
+(`_stages` in [`colorcc/__init__.py`](https://github.com/Acero-AI/colorcc/blob/main/colorcc/__init__.py)) on either GPU:
 
 1. **Start** (`init`): each pixel points at a parent. A warp vote finds runs of one colour among its 32 pixels,
    and each pixel points at the first pixel of its run.
@@ -153,10 +151,10 @@ used as ground truth in the tests and as baselines in the benchmarks.
 
 ## Correctness
 
-[`tests/test_colorcc.py`](tests/test_colorcc.py) compares every flag combination, 4 and 8 neighbours, with and
+[`tests/test_colorcc.py`](https://github.com/Acero-AI/colorcc/blob/main/tests/test_colorcc.py) compares every flag combination, 4 and 8 neighbours, with and
 without an ignored colour, against cc3d: the same labels, value for value, on ten test images (noise,
 checkerboards, one-pixel diagonals, a spiral, single rows and columns and others), plus a test that labels a large
-image many times to catch races. All 285 tests pass on an RTX 3070 against the released wheel ([`results/rtx3070/tests.txt`](results/rtx3070/tests.txt)), and passed on an Apple M5 Pro one commit earlier ([`results/m5/tests.txt`](results/m5/tests.txt); the Metal kernels are unchanged since). In every benchmark the labels were also identical to cc3d at every size.
+image many times to catch races. All 285 tests pass on an RTX 3070 against the released wheel ([`results/rtx3070/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/rtx3070/tests.txt)), and passed on an Apple M5 Pro one commit earlier ([`results/m5/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/m5/tests.txt); the Metal kernels are unchanged since). In every benchmark the labels were also identical to cc3d at every size.
 
 ## Development
 
@@ -180,16 +178,16 @@ python bench/tables.py                                            # the tables i
 `bench/profile.py` times each stage and each library's kernels at one size (it compiles its kernel variants with a
 CUDA toolkit), and `bench/check_labels.py` checks a label file against its image on the CPU with SciPy.
 
-Issues and pull requests are welcome. Releases are listed in [`CHANGELOG.md`](CHANGELOG.md).
+Issues and pull requests are welcome. Releases are listed in [`CHANGELOG.md`](https://github.com/Acero-AI/colorcc/blob/main/CHANGELOG.md).
 
 ## Citing
 
 If colorcc helps your work, please cite it: GitHub's *Cite this repository* button (from
-[`CITATION.cff`](CITATION.cff)) gives BibTeX and APA.
+[`CITATION.cff`](https://github.com/Acero-AI/colorcc/blob/main/CITATION.cff)) gives BibTeX and APA.
 
 ## Licence
 
-MIT. See [`LICENSE`](LICENSE).
+MIT. See [`LICENSE`](https://github.com/Acero-AI/colorcc/blob/main/LICENSE).
 
 ---
 

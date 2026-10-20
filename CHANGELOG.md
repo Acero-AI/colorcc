@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (2026-10-20)
+
+- The README renders on PyPI too: images and links point at GitHub. No code changes.
+
 ## 0.1.0 (2026-10-20)
 
 First release.
