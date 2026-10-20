@@ -1,0 +1,230 @@
+{
+ "rows": [
+  {
+   "file": "sheet.pdf.300.npy",
+   "variants": {
+    "variants": [
+     {
+      "join": "min",
+      "order": "ours",
+      "layout": "2d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.3603548278808594,
+      "regions": 174726,
+      "find_steps": 24851706589,
+      "atomics": 197961604,
+      "failed_atomics": 84736330
+     },
+     {
+      "join": "min",
+      "order": "ours",
+      "layout": "1d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.40158285522460935,
+      "regions": 174726,
+      "find_steps": 35878726015,
+      "atomics": 203267504,
+      "failed_atomics": 90042230
+     },
+     {
+      "join": "min",
+      "order": "cucim",
+      "layout": "2d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.04982447814941406,
+      "regions": 174726,
+      "find_steps": 4148758250,
+      "atomics": 177792137,
+      "failed_atomics": 64566863
+     },
+     {
+      "join": "min",
+      "order": "cucim",
+      "layout": "1d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.012062591552734375,
+      "regions": 174726,
+      "find_steps": 1368021189,
+      "atomics": 134164033,
+      "failed_atomics": 20938759
+     },
+     {
+      "join": "cas",
+      "order": "ours",
+      "layout": "2d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.5512898559570313,
+      "regions": 174726,
+      "find_steps": 50122333842,
+      "atomics": 215858198,
+      "failed_atomics": 102632924
+     },
+     {
+      "join": "cas",
+      "order": "ours",
+      "layout": "1d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.5481082763671875,
+      "regions": 174726,
+      "find_steps": 85392954478,
+      "atomics": 210955715,
+      "failed_atomics": 97730441
+     },
+     {
+      "join": "cas",
+      "order": "cucim",
+      "layout": "2d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.580864013671875,
+      "regions": 174726,
+      "find_steps": 59392161315,
+      "atomics": 194280772,
+      "failed_atomics": 81055498
+     },
+     {
+      "join": "cas",
+      "order": "cucim",
+      "layout": "1d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.04035158538818359,
+      "regions": 174726,
+      "find_steps": 3216480239,
+      "atomics": 126883908,
+      "failed_atomics": 13658634
+     },
+     {
+      "join": "cucim's own kernel",
+      "time": 0.024642559051513673,
+      "regions": 174726,
+      "find_steps": 5492211733,
+      "atomics": 138019869,
+      "failed_atomics": 24794595
+     }
+    ],
+    "H": 9000,
+    "W": 12600
+   }
+  },
+  {
+   "file": "sheet.pdf.600.npy",
+   "variants": {
+    "variants": [
+     {
+      "join": "min",
+      "order": "ours",
+      "layout": "2d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 1.400303466796875,
+      "regions": 310707,
+      "find_steps": 84504313767,
+      "atomics": 827279557,
+      "failed_atomics": 373990264
+     },
+     {
+      "join": "min",
+      "order": "ours",
+      "layout": "1d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 1.6747601318359375,
+      "regions": 310707,
+      "find_steps": 142488397135,
+      "atomics": 788129428,
+      "failed_atomics": 334840135
+     },
+     {
+      "join": "min",
+      "order": "cucim",
+      "layout": "2d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.13508915710449218,
+      "regions": 310707,
+      "find_steps": 15715154760,
+      "atomics": 723587735,
+      "failed_atomics": 270298442
+     },
+     {
+      "join": "min",
+      "order": "cucim",
+      "layout": "1d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.05816524887084961,
+      "regions": 310707,
+      "find_steps": 3991572374,
+      "atomics": 459626339,
+      "failed_atomics": 6337046
+     },
+     {
+      "join": "cas",
+      "order": "ours",
+      "layout": "2d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 2.32645703125,
+      "regions": 310707,
+      "find_steps": 218730423243,
+      "atomics": 905487015,
+      "failed_atomics": 452197722
+     },
+     {
+      "join": "cas",
+      "order": "ours",
+      "layout": "1d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 2.338786376953125,
+      "regions": 310707,
+      "find_steps": 375729294546,
+      "atomics": 832014032,
+      "failed_atomics": 378724739
+     },
+     {
+      "join": "cas",
+      "order": "cucim",
+      "layout": "2d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 2.423437255859375,
+      "regions": 310707,
+      "find_steps": 246235257638,
+      "atomics": 791766551,
+      "failed_atomics": 338477258
+     },
+     {
+      "join": "cas",
+      "order": "cucim",
+      "layout": "1d",
+      "index": "xy",
+      "colour": "packed",
+      "time": 0.10850128173828125,
+      "regions": 310707,
+      "find_steps": 7705130641,
+      "atomics": 459833886,
+      "failed_atomics": 6544593
+     },
+     {
+      "join": "cucim's own kernel",
+      "time": 0.09096089935302734,
+      "regions": 310707,
+      "find_steps": 11716056959,
+      "atomics": 469479020,
+      "failed_atomics": 16189727
+     }
+    ],
+    "H": 18000,
+    "W": 25200
+   }
+  }
+ ]
+}

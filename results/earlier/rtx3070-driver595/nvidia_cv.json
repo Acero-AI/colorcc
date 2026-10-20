@@ -1,0 +1,88 @@
+{
+ "rows": [
+  {
+   "file": "sheet.pdf.50.npy",
+   "ours4": {
+    "time": 0.00040762400021776557,
+    "peak": 12651520,
+    "n": 83981,
+    "H": 1500,
+    "W": 2100
+   },
+   "H": 1500,
+   "W": 2100,
+   "cvcuda4": {
+    "time": 0.00035326002398505807,
+    "peak": 0,
+    "n": null,
+    "H": 1500,
+    "W": 2100,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 83981
+   }
+  },
+  {
+   "file": "sheet.pdf.100.npy",
+   "ours4": {
+    "time": 0.0014161759754642844,
+    "peak": 50598912,
+    "n": 141055,
+    "H": 3000,
+    "W": 4200
+   },
+   "H": 3000,
+   "W": 4200,
+   "cvcuda4": {
+    "time": 0.0010471749701537192,
+    "peak": 0,
+    "n": null,
+    "H": 3000,
+    "W": 4200,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 141055
+   }
+  },
+  {
+   "file": "sheet.pdf.200.npy",
+   "ours4": {
+    "time": 0.005462633969727904,
+    "peak": 202390528,
+    "n": 264920,
+    "H": 6000,
+    "W": 8400
+   },
+   "H": 6000,
+   "W": 8400,
+   "cvcuda4": {
+    "time": 0.003637190966401249,
+    "peak": 0,
+    "n": null,
+    "H": 6000,
+    "W": 8400,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 264920
+   }
+  },
+  {
+   "file": "sheet.pdf.300.npy",
+   "ours4": {
+    "time": 0.012149874004535377,
+    "peak": 455375872,
+    "n": 388473,
+    "H": 9000,
+    "W": 12600
+   },
+   "H": 9000,
+   "W": 12600,
+   "cvcuda4": {
+    "time": 0.00793631497072056,
+    "peak": 0,
+    "n": null,
+    "H": 9000,
+    "W": 12600,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 388473
+   }
+  }
+ ]
+}

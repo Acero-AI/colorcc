@@ -1,0 +1,9 @@
+[2026-10-20T19:56:48Z] install the new wheel with [cuda13,bench]
+3e15639 CUDA launch: pass pointers by value, cache the stream and the parameter buffer (1.24 -> 0.50 ms per call at 3 MP)
+[2026-10-20T19:56:52Z] tests against the installed wheel
+285 passed in 137.45s (0:02:17)
+[2026-10-20T19:59:14Z] synthetic sheet
+[2026-10-20T19:59:16Z] bench.py sweep
+[2026-10-20T20:46:00Z] nvidia.py comparison
+[2026-10-20T21:03:15Z] e2e.py
+[2026-10-20T21:05:21Z] done

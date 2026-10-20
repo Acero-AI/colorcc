@@ -1,0 +1,2 @@
+Apple M5 Pro (MacBook Pro), macOS 26.5.1 (build 25F80), PyTorch 2.14.1 with MPS.
+Written afterwards from the header of tests.txt (2026-10-20); the benchmark files record the same device ("arm GPU (MPS)") and PyTorch 2.14.1.

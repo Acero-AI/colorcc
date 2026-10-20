@@ -1,0 +1,392 @@
+{
+ "rows": [
+  {
+   "file": "sheet.pdf.50.npy",
+   "ours": {
+    "time": 0.0002119690179824829,
+    "peak": 12651520,
+    "n": 50694,
+    "H": 1500,
+    "W": 2100
+   },
+   "H": 1500,
+   "W": 2100,
+   "ours4": {
+    "time": 0.00034279702231287956,
+    "peak": 12651520,
+    "n": 83981,
+    "H": 1500,
+    "W": 2100
+   },
+   "npp": {
+    "time": 0.004560570931062102,
+    "peak": 37865984,
+    "n": 50713,
+    "H": 1500,
+    "W": 2100,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 50713
+   },
+   "npp_raw": {
+    "time": 0.0011705399956554174,
+    "peak": 25200640,
+    "n": 0,
+    "H": 1500,
+    "W": 2100,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 50712
+   },
+   "cucim": {
+    "time": 0.005648380843922496,
+    "peak": 13227520,
+    "n": 50694,
+    "H": 1500,
+    "W": 2100,
+    "same_grouping_as_ours": true,
+    "distinct_labels": 50694
+   },
+   "cvcuda4": {
+    "error": "TypeError: label(): incompatible function arguments. The following argument types are supported:"
+   },
+   "old": {
+    "time": 0.0016686359886080027,
+    "peak": 12600320,
+    "n": 83981,
+    "H": 1500,
+    "W": 2100,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 83981
+   }
+  },
+  {
+   "file": "sheet.pdf.100.npy",
+   "ours": {
+    "time": 0.0012002498842775822,
+    "peak": 50598912,
+    "n": 71908,
+    "H": 3000,
+    "W": 4200
+   },
+   "H": 3000,
+   "W": 4200,
+   "ours4": {
+    "time": 0.0012548989616334438,
+    "peak": 50598912,
+    "n": 141055,
+    "H": 3000,
+    "W": 4200
+   },
+   "npp": {
+    "time": 0.01013115094974637,
+    "peak": 151266304,
+    "n": 71924,
+    "H": 3000,
+    "W": 4200,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 71924
+   },
+   "npp_raw": {
+    "time": 0.005924378987401724,
+    "peak": 100800512,
+    "n": 0,
+    "H": 3000,
+    "W": 4200,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 71928
+   },
+   "cucim": {
+    "time": 0.012677758932113647,
+    "peak": 51282944,
+    "n": 71908,
+    "H": 3000,
+    "W": 4200,
+    "same_grouping_as_ours": true,
+    "distinct_labels": 71908
+   },
+   "cvcuda4": {
+    "error": "TypeError: label(): incompatible function arguments. The following argument types are supported:"
+   },
+   "old": {
+    "time": 0.005411613034084439,
+    "peak": 50400256,
+    "n": 141055,
+    "H": 3000,
+    "W": 4200,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 141055
+   }
+  },
+  {
+   "file": "sheet.pdf.200.npy",
+   "ours": {
+    "time": 0.00440368102863431,
+    "peak": 202390528,
+    "n": 125723,
+    "H": 6000,
+    "W": 8400
+   },
+   "H": 6000,
+   "W": 8400,
+   "ours4": {
+    "time": 0.004319171886891127,
+    "peak": 202390528,
+    "n": 264920,
+    "H": 6000,
+    "W": 8400
+   },
+   "npp": {
+    "time": 0.032405945006757975,
+    "peak": 604866048,
+    "n": 125824,
+    "H": 6000,
+    "W": 8400,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 125824
+   },
+   "npp_raw": {
+    "time": 0.0304521219804883,
+    "peak": 403200512,
+    "n": 0,
+    "H": 6000,
+    "W": 8400,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 125822
+   },
+   "cucim": {
+    "time": 0.03480194206349552,
+    "peak": 203136512,
+    "n": 125723,
+    "H": 6000,
+    "W": 8400,
+    "same_grouping_as_ours": true,
+    "distinct_labels": 125723
+   },
+   "cvcuda4": {
+    "error": "TypeError: label(): incompatible function arguments. The following argument types are supported:"
+   },
+   "old": {
+    "time": 0.021171173080801964,
+    "peak": 201600000,
+    "n": 264920,
+    "H": 6000,
+    "W": 8400,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 264920
+   }
+  },
+  {
+   "file": "sheet.pdf.300.npy",
+   "ours": {
+    "time": 0.010374478064477444,
+    "peak": 455375872,
+    "n": 174726,
+    "H": 9000,
+    "W": 12600
+   },
+   "H": 9000,
+   "W": 12600,
+   "ours4": {
+    "time": 0.00957914488390088,
+    "peak": 455375872,
+    "n": 388473,
+    "H": 9000,
+    "W": 12600
+   },
+   "npp": {
+    "time": 0.058455249993130565,
+    "peak": 1361667072,
+    "n": 1,
+    "H": 9000,
+    "W": 12600,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 107222
+   },
+   "npp_raw": {
+    "time": 0.055030118906870484,
+    "peak": 907200512,
+    "n": 0,
+    "H": 9000,
+    "W": 12600,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 174764
+   },
+   "cucim": {
+    "time": 0.05977775505743921,
+    "peak": 455731200,
+    "n": 174726,
+    "H": 9000,
+    "W": 12600,
+    "same_grouping_as_ours": true,
+    "distinct_labels": 174726
+   },
+   "cvcuda4": {
+    "error": "TypeError: label(): incompatible function arguments. The following argument types are supported:"
+   },
+   "old": {
+    "time": 0.05213808291591704,
+    "peak": 453600256,
+    "n": 388473,
+    "H": 9000,
+    "W": 12600,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 388473
+   }
+  },
+  {
+   "file": "sheet.pdf.400.npy",
+   "ours": {
+    "time": 0.01851134398020804,
+    "peak": 810558464,
+    "n": 226420,
+    "H": 12000,
+    "W": 16800
+   },
+   "H": 12000,
+   "W": 16800,
+   "ours4": {
+    "time": 0.018162805819883943,
+    "peak": 810558464,
+    "n": 626036,
+    "H": 12000,
+    "W": 16800
+   },
+   "npp": {
+    "time": 0.11625096993520856,
+    "peak": 2420466176,
+    "n": 1,
+    "H": 12000,
+    "W": 16800,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 82200
+   },
+   "npp_raw": {
+    "time": 0.0960053619928658,
+    "peak": 1614807040,
+    "n": 0,
+    "H": 12000,
+    "W": 16800,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 226520
+   },
+   "cucim": {
+    "time": 0.06936708092689514,
+    "peak": 810160640,
+    "n": 226420,
+    "H": 12000,
+    "W": 16800,
+    "same_grouping_as_ours": true,
+    "distinct_labels": 226420
+   },
+   "cvcuda4": {
+    "error": "TypeError: label(): incompatible function arguments. The following argument types are supported:"
+   },
+   "old": {
+    "time": 0.06650097598321736,
+    "peak": 807403520,
+    "n": 626036,
+    "H": 12000,
+    "W": 16800,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 626036
+   }
+  },
+  {
+   "file": "sheet.pdf.600.npy",
+   "ours": {
+    "time": 0.0391355010215193,
+    "peak": 1821496320,
+    "n": 310707,
+    "H": 18000,
+    "W": 25200
+   },
+   "H": 18000,
+   "W": 25200,
+   "ours4": {
+    "time": 0.027877365006133914,
+    "peak": 1821496320,
+    "n": 924147,
+    "H": 18000,
+    "W": 25200
+   },
+   "npp": {
+    "error": "RuntimeError: Trying to create tensor with negative dimension -665708524: [-665708524]"
+   },
+   "npp_raw": {
+    "time": 0.2926489100791514,
+    "peak": 3628800512,
+    "n": 0,
+    "H": 18000,
+    "W": 25200,
+    "same_grouping_as_ours": false,
+    "distinct_labels": 310796
+   },
+   "cucim": {
+    "time": 0.0863035439979285,
+    "peak": 1819602432,
+    "n": 310707,
+    "H": 18000,
+    "W": 25200,
+    "same_grouping_as_ours": true,
+    "distinct_labels": 310707
+   },
+   "cvcuda4": {
+    "error": "TypeError: label(): incompatible function arguments. The following argument types are supported:"
+   },
+   "old": {
+    "time": 0.13431245903484523,
+    "peak": 1814400000,
+    "n": 924147,
+    "H": 18000,
+    "W": 25200,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 924147
+   }
+  },
+  {
+   "file": "sheet.pdf.800.npy",
+   "ours": {
+    "time": 0.04889842285774648,
+    "peak": 3238215168,
+    "n": 414731,
+    "H": 24000,
+    "W": 33600
+   },
+   "H": 24000,
+   "W": 33600,
+   "ours4": {
+    "time": 0.04784604208543897,
+    "peak": 3238215168,
+    "n": 1020902,
+    "H": 24000,
+    "W": 33600
+   },
+   "npp": {
+    "error": "RuntimeError: Trying to create tensor with negative dimension -1069367288: [-1069367288]"
+   },
+   "npp_raw": {
+    "error": "RuntimeError: Trying to create tensor with negative dimension -1069367288: [-1069367288]"
+   },
+   "cucim": {
+    "time": 0.1331518681254238,
+    "peak": 3231352320,
+    "n": 414731,
+    "H": 24000,
+    "W": 33600,
+    "same_grouping_as_ours": true,
+    "distinct_labels": 414731
+   },
+   "cvcuda4": {
+    "error": ":0 (cudaErrorIllegalAddress)"
+   },
+   "old": {
+    "time": 0.2617061729542911,
+    "peak": 3225600000,
+    "n": 1020902,
+    "H": 24000,
+    "W": 33600,
+    "same_grouping_as_ours4": true,
+    "distinct_labels": 1020902
+   }
+  }
+ ]
+}

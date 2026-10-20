@@ -1,0 +1,10 @@
+__pycache__/
+*.so
+build/
+*.egg-info/
+
+cache/
+*.npy
+*.pdf
+dist/
+.pytest_cache/

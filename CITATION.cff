@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use colorcc, please cite it as below."
+title: "colorcc: exact-colour connected-component labelling on NVIDIA and Apple GPUs"
+authors:
+  - family-names: Adethya
+    given-names: Gokul
+    affiliation: Fablnx
+version: 0.1.0
+date-released: 2026-10-20
+license: MIT
+repository-code: "https://github.com/Acero-AI/colorcc"
+url: "https://blogs.fablnx.com/posts/every-colour/"
+keywords: [connected components, labelling, union-find, GPU, CUDA, Metal, PyTorch]

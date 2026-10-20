@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "colorcc"
+version = "0.1.0"
+description = "Exact-colour connected-component labelling of RGB images on NVIDIA and Apple GPUs"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Gokul Adethya", email = "frozenwolf2003.com@gmail.com" }]
+requires-python = ">=3.10"
+dependencies = ["torch>=2.6"]
+keywords = ["connected components", "labelling", "union-find", "cuda", "metal", "gpu", "pytorch"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Environment :: GPU :: NVIDIA CUDA",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+
+[project.optional-dependencies]
+cuda12 = ["cupy-cuda12x[ctk]>=14"]
+cuda13 = ["cupy-cuda13x[ctk]>=14"]
+test = ["pytest", "numpy", "connected-components-3d", "opencv-python-headless"]
+bench = ["numpy", "matplotlib", "pypdfium2", "connected-components-3d", "opencv-python-headless", "scipy"]
+
+[project.urls]
+Homepage = "https://github.com/Acero-AI/colorcc"
+Issues = "https://github.com/Acero-AI/colorcc/issues"
+
+[tool.setuptools.packages.find]
+include = ["colorcc*"]
+
+[tool.setuptools.package-data]
+"colorcc.cuda" = ["*.cu"]
+"colorcc.metal" = ["*.metal"]
