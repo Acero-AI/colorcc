@@ -5,8 +5,8 @@ authors:
   - family-names: Adethya
     given-names: Gokul
     affiliation: Fablnx
-version: 0.1.1
-date-released: 2026-10-20
+version: 0.1.2
+date-released: 2026-10-21
 license: MIT
 repository-code: "https://github.com/Acero-AI/colorcc"
 url: "https://blogs.fablnx.com/posts/every-colour/"

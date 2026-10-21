@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 (2026-10-21)
+
+- README and `results/`: a rerun on an A100 SXM4 with 0.1.1 from PyPI (49 ms for 806 megapixels; cuCIM 2.7x to 19x
+  slower, NPP 2.7x to 11x slower and wrong) leads the benchmarks; the 4-neighbour CV-CUDA comparison is dropped. No code changes.
+
 ## 0.1.1 (2026-10-20)
 
 - The README renders on PyPI too: images and links point at GitHub. No code changes.
