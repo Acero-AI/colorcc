@@ -4,28 +4,25 @@
 
 **Connected components of every colour at once, on the GPU.**
 
-Exact region labels for RGB images in PyTorch, on NVIDIA and Apple GPUs.
+Labels every region of touching pixels with the same RGB value, in one pass. PyTorch tensors in and out, on CUDA
+and Apple Metal. Output identical to cc3d's.
 
 [![PyPI](https://img.shields.io/pypi/v/colorcc)](https://pypi.org/project/colorcc/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://pypi.org/project/colorcc/)
 [![test](https://github.com/Acero-AI/colorcc/actions/workflows/test.yml/badge.svg)](https://github.com/Acero-AI/colorcc/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](https://github.com/Acero-AI/colorcc/blob/main/LICENSE)
 
-**[How it works, with live figures: read the post on the Fablnx engineering blog →](https://blogs.fablnx.com/posts/every-colour/)**
-
 <img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/hero.png" alt="A drawing and colorcc's labels: every region of every colour" width="100%">
+
+How it works, with interactive figures: [*Every colour at once*](https://blogs.fablnx.com/posts/every-colour/)
 
 </div>
 
-> **New here?** [*Every colour at once*](https://blogs.fablnx.com/posts/every-colour/) builds this labeller from
-> scratch: union-find, warps, atomics, why the white paper of a drawing is the hardest region of all, and how it
-> compares with NVIDIA's libraries. Every figure is live, and no GPU background is needed.
-
 ## Why
 
-Most connected-component labellers (OpenCV, SciPy, cuCIM's binary mode) see black and white. Real images, and
-construction drawings in particular, are made of many exact colours, with anti-aliased edges in between. colorcc
-gives every exact colour its own regions, in one pass over the image, with no loop over colours:
+OpenCV and SciPy label binary images. cc3d (CPU) and cuCIM (GPU) label many values if you first pack RGB into an
+integer. colorcc reads RGB directly. I wrote it for rendered construction drawings: 806-megapixel sheets with about
+a thousand anti-aliased colours. It gives every exact colour its own regions, in one pass, with no loop over colours:
 
 <img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/colour-vs-binary.png" alt="The same pixels: a black-and-white labeller makes all ink one region; colorcc separates each exact colour" width="100%">
 
@@ -69,22 +66,27 @@ python examples/label_png.py drawing.png labels.png
 
 ## Benchmarks
 
-On an NVIDIA A100, with the picture already on the GPU, the full 806-megapixel drawing takes **49 ms** (89 ms on an RTX 3070):
+On an NVIDIA A100, with the picture already on the GPU, the full 806-megapixel drawing takes **49 ms** (89 ms on an RTX 3070), or 299 ms and 706 ms counting copies to and
+from the GPU. All times come from one synthetic, mostly white sheet:
 
-<img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/benchmarks.png" alt="colorcc against NVIDIA cuCIM and NPP on an A100, at every size from 3 to 806 megapixels" width="100%">
+<img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/benchmarks.png" alt="Time to label the sheet on an A100 at seven sizes: colorcc, NVIDIA cuCIM and NVIDIA NPP" width="100%">
 
 <sub>Interactive, with an RTX 3070 and the Apple M5 Pro against cc3d: <a href="https://blogs.fablnx.com/posts/every-colour/#vsall">Fig. 1 of the post</a>.</sub>
 
 | | 3 MP render | 454 MP (600 dpi) | 806 MP sheet |
 |---|---|---|---|
 | colorcc | 0.24 ms | 27.2 ms | 49.4 ms |
-| NVIDIA cuCIM `label()` | 4.65 ms (**19x** slower) | 85.6 ms (**3.1x** slower) | 131 ms (**2.7x** slower) |
-| NVIDIA NPP `LabelMarkersUF` | 0.65 ms (**2.7x** slower), wrong labels | 293 ms (**11x** slower), wrong labels | buffer-size query overflows |
+| NVIDIA cuCIM `label()` | 4.65 ms (19x) | 85.6 ms (3.1x) | 131 ms (2.7x) |
+| NVIDIA NPP `LabelMarkersUF` | 0.65 ms (2.7x), [wrong labels](https://github.com/Acero-AI/npp-labelmarkers-bug) | 293 ms (11x), [wrong labels](https://github.com/Acero-AI/npp-labelmarkers-bug) | buffer-size query overflows |
+
+At 3 MP cuCIM's time is mostly a fixed per-call cost. cuCIM and NPP get the image already packed to 32 bits before
+their clock starts.
 
 On the RTX 3070: cuCIM 1.7x to 5.4x slower, NPP 2.5x to 24x slower.
 
-The same sheet takes 151 ms on an Apple M5 Pro, 17x faster than cc3d on one CPU core.
-cuCIM gives the same regions in the same memory; NPP needs twice the memory and splits regions at every size it ran. 
+The same sheet takes 151 ms on an Apple M5 Pro (232 ms with copies). cc3d, the CPU reference, takes 2.59 s on one core
+of the same Mac. cuCIM gives the same regions in the same memory; NPP needs twice the memory and splits regions at
+every size it ran.
 
 > **Every number**, at every size, with the machines, versions and method: [`results/README.md`](https://github.com/Acero-AI/colorcc/blob/main/results/README.md).
 > The same data as live charts, with what each idea is worth: [chapter 9 of the post](https://blogs.fablnx.com/posts/every-colour/#c9).
@@ -151,14 +153,16 @@ used as ground truth in the tests and as baselines in the benchmarks.
 
 - Images up to 2^31 pixels (labels are 32-bit pixel indices).
 - 3-channel `uint8` input only.
-- Tested only on the three GPUs above.
+- Tested on an A100 SXM4, an RTX 3070 and an M5 Pro; not on Hopper or Blackwell. No AMD backend.
+- `find_root` reads parents with plain loads while other threads write them, which is formally a data race; the
+  labels are checked against cc3d, but tests cannot prove a race harmless.
 
 ## Correctness
 
 [`tests/test_colorcc.py`](https://github.com/Acero-AI/colorcc/blob/main/tests/test_colorcc.py) compares every flag combination, 4 and 8 neighbours, with and
 without an ignored colour, against cc3d: the same labels, value for value, on ten test images (noise,
 checkerboards, one-pixel diagonals, a spiral, single rows and columns and others), plus a test that labels a large
-image many times to catch races. All 285 tests pass on an RTX 3070 against the released wheel ([`results/rtx3070/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/rtx3070/tests.txt)) and on an Apple M5 Pro against colorcc 0.1.1 installed from PyPI ([`results/m5/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/m5/tests.txt)). In every benchmark the labels were also identical to cc3d at every size.
+image many times to catch races. All 285 tests pass on an RTX 3070 against the released wheel ([`results/rtx3070/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/rtx3070/tests.txt)), on an A100 SXM4 ([`results/a100/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/a100/tests.txt)) and on an Apple M5 Pro ([`results/m5/tests.txt`](https://github.com/Acero-AI/colorcc/blob/main/results/m5/tests.txt)), both against colorcc 0.1.1 installed from PyPI. In every benchmark the labels were also identical to cc3d at every size.
 
 ## Development
 
