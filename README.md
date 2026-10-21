@@ -71,6 +71,10 @@ python examples/label_png.py drawing.png labels.png
 
 On an RTX 3070, with the picture already on the GPU, the full 806-megapixel drawing takes **89 ms**:
 
+<img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/benchmarks.png" alt="colorcc against NVIDIA cuCIM, NPP and CV-CUDA on an RTX 3070, at every size from 3 to 806 megapixels" width="100%">
+
+<sub>Interactive, with the A100 and the Apple M5 Pro against cc3d: <a href="https://blogs.fablnx.com/posts/every-colour/#vsall">Fig. 1 of the post</a>.</sub>
+
 | | 3 MP render | 454 MP (600 dpi) | 806 MP sheet |
 |---|---|---|---|
 | colorcc | 0.50 ms | 49.6 ms | 88.9 ms |
