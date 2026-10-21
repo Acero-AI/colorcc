@@ -184,6 +184,25 @@ CUDA toolkit), and `bench/check_labels.py` checks a label file against its image
 
 Issues and pull requests are welcome. Releases are listed in [`CHANGELOG.md`](https://github.com/Acero-AI/colorcc/blob/main/CHANGELOG.md).
 
+## Acknowledgements
+
+Every idea in colorcc comes from someone else's paper or code; the work here was fitting them together for exact
+colours on NVIDIA and Apple GPUs. [cc3d](https://github.com/seung-lab/connected-components-3d) by William Silversmith
+is the reference every test compares against. Profiling [RAPIDS cuCIM](https://github.com/rapidsai/cucim), a general
+n-dimensional labeller, taught us the join order that matters most on NVIDIA. [CuPy](https://cupy.dev) compiles the
+CUDA kernels and [PyTorch](https://pytorch.org) the Metal ones. The comparisons in `results/` are narrow: cuCIM, NPP
+and cc3d are general tools, and colorcc does one job.
+
+- B. A. Galler, M. J. Fischer. An improved equivalence algorithm. *Communications of the ACM* 7(5), 1964.
+- R. E. Tarjan, J. van Leeuwen. Worst-case analysis of set union algorithms. *Journal of the ACM* 31(2), 1984.
+- K. Wu, E. Otoo, K. Suzuki. Optimizing two-pass connected-component labeling algorithms. *Pattern Analysis and Applications* 12(2), 2009.
+- V. M. A. Oliveira, R. A. Lotufo. A study on connected components labeling algorithms using GPUs. *SIBGRAPI* 2010.
+- Y. Komura. GPU-based cluster-labeling algorithm without the use of conventional iteration. *Computer Physics Communications* 194, 2015.
+- D. P. Playne, K. Hawick. A new algorithm for parallel connected-component labelling on GPUs. *IEEE TPDS* 29(6), 2018.
+- A. Hennequin, L. Lacassagne, L. Cabaret, Q. Meunier. A new direct connected component labeling and analysis algorithms for GPUs. *DASIP* 2018.
+- S. Allegretti, F. Bolelli, C. Grana. Optimized block-based algorithms to label connected components on GPUs. *IEEE TPDS* 31(2), 2020.
+- C. Grana, F. Bolelli, L. Baraldi, R. Vezzani. YACCLAB: Yet Another Connected Components Labeling Benchmark. *ICPR* 2016.
+
 ## Citing
 
 If colorcc helps your work, please cite it: GitHub's *Cite this repository* button (from
