@@ -193,15 +193,15 @@ n-dimensional labeller, taught us the join order that matters most on NVIDIA. [C
 CUDA kernels and [PyTorch](https://pytorch.org) the Metal ones. The comparisons in `results/` are narrow: cuCIM, NPP
 and cc3d are general tools, and colorcc does one job.
 
-- B. A. Galler, M. J. Fischer. An improved equivalence algorithm. *Communications of the ACM* 7(5), 1964.
-- R. E. Tarjan, J. van Leeuwen. Worst-case analysis of set union algorithms. *Journal of the ACM* 31(2), 1984.
-- K. Wu, E. Otoo, K. Suzuki. Optimizing two-pass connected-component labeling algorithms. *Pattern Analysis and Applications* 12(2), 2009.
+- B. A. Galler, M. J. Fischer. An improved equivalence algorithm. *Communications of the ACM* 7(5): 301–303, 1964.
+- R. E. Tarjan, J. van Leeuwen. Worst-case analysis of set union algorithms. *Journal of the ACM* 31(2): 245–281, 1984. doi:10.1145/62.2160
+- K. Wu, E. Otoo, K. Suzuki. Optimizing two-pass connected-component labeling algorithms. *Pattern Analysis and Applications* 12: 117–135, 2009. doi:10.1007/s10044-008-0109-y
 - V. M. A. Oliveira, R. A. Lotufo. A study on connected components labeling algorithms using GPUs. *SIBGRAPI* 2010.
-- Y. Komura. GPU-based cluster-labeling algorithm without the use of conventional iteration. *Computer Physics Communications* 194, 2015.
-- D. P. Playne, K. Hawick. A new algorithm for parallel connected-component labelling on GPUs. *IEEE TPDS* 29(6), 2018.
-- A. Hennequin, L. Lacassagne, L. Cabaret, Q. Meunier. A new direct connected component labeling and analysis algorithms for GPUs. *DASIP* 2018.
-- S. Allegretti, F. Bolelli, C. Grana. Optimized block-based algorithms to label connected components on GPUs. *IEEE TPDS* 31(2), 2020.
-- C. Grana, F. Bolelli, L. Baraldi, R. Vezzani. YACCLAB: Yet Another Connected Components Labeling Benchmark. *ICPR* 2016.
+- Y. Komura. GPU-based cluster-labeling algorithm without the use of conventional iteration. *Computer Physics Communications* 194: 54–58, 2015.
+- D. P. Playne, K. Hawick. A new algorithm for parallel connected-component labelling on GPUs. *IEEE TPDS* 29(6): 1217–1230, 2018.
+- A. Hennequin, L. Lacassagne, L. Cabaret, Q. Meunier. A new direct connected component labeling and analysis algorithms for GPUs. *DASIP* 2018, 76–81.
+- S. Allegretti, F. Bolelli, C. Grana. Optimized block-based algorithms to label connected components on GPUs. *IEEE TPDS* 31(2): 423–438, 2020. doi:10.1109/TPDS.2019.2934683
+- C. Grana, F. Bolelli, L. Baraldi, R. Vezzani. YACCLAB: Yet Another Connected Components Labeling Benchmark. *ICPR* 2016, 3109–3114. doi:10.1109/ICPR.2016.7900112
 
 ## Citing
 
