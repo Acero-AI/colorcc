@@ -64,13 +64,13 @@ def main():
     for gpu, files in LIBS.items():
         body = []
         for g in libs(files):
-            o, c, n, o4, cv = (g.get(k, {}) for k in ("ours", "cucim", "npp_raw", "ours4", "cvcuda4"))
+            o, c, n = (g.get(k, {}) for k in ("ours", "cucim", "npp_raw"))
             ratio = lambda a, b: f"{a['time'] / b['time']:.1f}x" if "time" in a and "time" in b else "–"
             body.append([str(g["dpi"]), f"{g['mpx']:.0f}", ms(o.get("time")), ms(c.get("time")), ratio(c, o),
-                         mb(o.get("peak")), mb(c.get("peak")), mb(n.get("peak")), ms(o4.get("time")), ms(cv.get("time")), ratio(o4, cv)])
+                         ms(n.get("time")), ratio(n, o), mb(o.get("peak")), mb(c.get("peak")), mb(n.get("peak"))])
         note = " (earlier benchmark; small-size ratios approximate)" if "A100" in gpu else ""
         out += [f"### Against NVIDIA's libraries, {gpu}{note}", "",
-                table(["dpi", "MP", "ours", "cuCIM", "cuCIM / ours", "memory: ours", "cuCIM", "NPP", "ours, 4 nbrs", "CV-CUDA, 4 nbrs", "ours4 / CV-CUDA"], body), ""]
+                table(["dpi", "MP", "ours", "cuCIM", "cuCIM / ours", "NPP (wrong labels)", "NPP / ours", "memory: ours", "cuCIM", "NPP"], body), ""]
     print("\n".join(out))
 
 

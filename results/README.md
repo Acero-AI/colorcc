@@ -16,7 +16,8 @@ On an RTX 3070, with the picture already on the GPU:
 - **1.7x faster than NVIDIA cuCIM** on the full sheet, rising to 5.4x on a 3-megapixel render, where cuCIM's
   fixed per-call cost dominates. Same regions, same GPU memory (cuCIM also needs a 32-bit copy of a colour picture first; colorcc reads RGB).
 - **NVIDIA NPP** gave wrong labels at every size, so it is not a reference (it also used twice the memory).
-- **NVIDIA CV-CUDA** only joins 4 neighbours, and there it is 1.6–1.9x *faster* than colorcc's 4-neighbour mode.
+- **NVIDIA NPP** is 2.5x slower on the 3-megapixel render and 24x slower at 454 megapixels.
+- NVIDIA CV-CUDA's `label` joins only 4 neighbours, which splits diagonal lines, so it is not compared.
 
 On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core of the same Mac (2.59 s).
 
@@ -65,27 +66,27 @@ On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core
 
 ### Against NVIDIA's libraries, RTX 3070
 
-| dpi | MP | ours | cuCIM | cuCIM / ours | memory: ours | cuCIM | NPP | ours, 4 nbrs | CV-CUDA, 4 nbrs | ours4 / CV-CUDA |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 50 | 3 | 0.50 ms | 2.73 ms | 5.4x | 12.7 MB | 13.2 MB | 25.2 MB | 0.48 ms | 0.25 ms | 1.9x |
-| 100 | 13 | 1.60 ms | 6.83 ms | 4.3x | 50.6 MB | 51.3 MB | 100.8 MB | 1.49 ms | 0.88 ms | 1.7x |
-| 200 | 50 | 5.61 ms | 15.7 ms | 2.8x | 202.4 MB | 203.1 MB | 403.2 MB | 5.51 ms | 3.37 ms | 1.6x |
-| 300 | 113 | 12.4 ms | 28.8 ms | 2.3x | 455.4 MB | 455.7 MB | 907.2 MB | 12.3 ms | 7.65 ms | 1.6x |
-| 400 | 202 | 22.6 ms | 47.7 ms | 2.1x | 810.6 MB | 810.2 MB | 1.61 GB | 22.1 ms | 13.4 ms | 1.6x |
-| 600 | 454 | 49.6 ms | 91.9 ms | 1.9x | 1.82 GB | 1.82 GB | 3.63 GB | 48.7 ms | 30.2 ms | 1.6x |
-| 800 | 806 | 88.9 ms | 151.5 ms | 1.7x | 3.24 GB | 3.23 GB | – | 86.8 ms | – | – |
+| dpi | MP | ours | cuCIM | cuCIM / ours | NPP (wrong labels) | NPP / ours | memory: ours | cuCIM | NPP |
+|---|---|---|---|---|---|---|---|---|---|
+| 50 | 3 | 0.50 ms | 2.73 ms | 5.4x | 1.26 ms | 2.5x | 12.7 MB | 13.2 MB | 25.2 MB |
+| 100 | 13 | 1.60 ms | 6.83 ms | 4.3x | 6.73 ms | 4.2x | 50.6 MB | 51.3 MB | 100.8 MB |
+| 200 | 50 | 5.61 ms | 15.7 ms | 2.8x | 43.0 ms | 7.7x | 202.4 MB | 203.1 MB | 403.2 MB |
+| 300 | 113 | 12.4 ms | 28.8 ms | 2.3x | 139.9 ms | 11.3x | 455.4 MB | 455.7 MB | 907.2 MB |
+| 400 | 202 | 22.6 ms | 47.7 ms | 2.1x | 332.5 ms | 14.7x | 810.6 MB | 810.2 MB | 1.61 GB |
+| 600 | 454 | 49.6 ms | 91.9 ms | 1.9x | 1.18 s | 23.7x | 1.82 GB | 1.82 GB | 3.63 GB |
+| 800 | 806 | 88.9 ms | 151.5 ms | 1.7x | – | – | 3.24 GB | 3.23 GB | – |
 
 ### Against NVIDIA's libraries, A100 PCIe (earlier benchmark; small-size ratios approximate)
 
-| dpi | MP | ours | cuCIM | cuCIM / ours | memory: ours | cuCIM | NPP | ours, 4 nbrs | CV-CUDA, 4 nbrs | ours4 / CV-CUDA |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 50 | 3 | 0.21 ms | 5.65 ms | 26.6x | 12.7 MB | 13.2 MB | 25.2 MB | 0.34 ms | – | – |
-| 100 | 13 | 1.20 ms | 12.7 ms | 10.6x | 50.6 MB | 51.3 MB | 100.8 MB | 1.25 ms | – | – |
-| 200 | 50 | 4.40 ms | 34.8 ms | 7.9x | 202.4 MB | 203.1 MB | 403.2 MB | 4.32 ms | – | – |
-| 300 | 113 | 10.4 ms | 59.8 ms | 5.8x | 455.4 MB | 455.7 MB | 907.2 MB | 9.58 ms | – | – |
-| 400 | 202 | 18.5 ms | 69.4 ms | 3.7x | 810.6 MB | 810.2 MB | 1.61 GB | 18.2 ms | – | – |
-| 600 | 454 | 39.1 ms | 86.3 ms | 2.2x | 1.82 GB | 1.82 GB | 3.63 GB | 27.9 ms | – | – |
-| 800 | 806 | 48.9 ms | 133.2 ms | 2.7x | 3.24 GB | 3.23 GB | – | 47.8 ms | – | – |
+| dpi | MP | ours | cuCIM | cuCIM / ours | NPP (wrong labels) | NPP / ours | memory: ours | cuCIM | NPP |
+|---|---|---|---|---|---|---|---|---|---|
+| 50 | 3 | 0.21 ms | 5.65 ms | 26.6x | 1.17 ms | 5.5x | 12.7 MB | 13.2 MB | 25.2 MB |
+| 100 | 13 | 1.20 ms | 12.7 ms | 10.6x | 5.92 ms | 4.9x | 50.6 MB | 51.3 MB | 100.8 MB |
+| 200 | 50 | 4.40 ms | 34.8 ms | 7.9x | 30.5 ms | 6.9x | 202.4 MB | 203.1 MB | 403.2 MB |
+| 300 | 113 | 10.4 ms | 59.8 ms | 5.8x | 55.0 ms | 5.3x | 455.4 MB | 455.7 MB | 907.2 MB |
+| 400 | 202 | 18.5 ms | 69.4 ms | 3.7x | 96.0 ms | 5.2x | 810.6 MB | 810.2 MB | 1.61 GB |
+| 600 | 454 | 39.1 ms | 86.3 ms | 2.2x | 292.6 ms | 7.5x | 1.82 GB | 1.82 GB | 3.63 GB |
+| 800 | 806 | 48.9 ms | 133.2 ms | 2.7x | – | – | 3.24 GB | 3.23 GB | – |
 
 ## How it was measured
 
@@ -97,17 +98,16 @@ timing comes from one synthetic sheet (`bench/synth_sheet.py`), mostly paper; pi
 behave differently. cc3d's times in `rtx3070/sheet.json` (50 s at 800 dpi) come from the rented box's shared server
 CPU and are not quoted; the cc3d reference is one core of the M5 Pro (2.59 s).
 `bench/nvidia.py` (the library comparison) runs each library in its own process, warms it up for at least half a
-second so the GPU is at its working clock, and takes the median of 5 calls (3 at 600 and 800 dpi). NPP, cuCIM and
-CV-CUDA get the picture already packed into one 32-bit number per pixel before the clock starts, the RGB picture
+second so the GPU is at its working clock, and takes the median of 5 calls (3 at 600 and 800 dpi). NPP and cuCIM
+get the picture already packed into one 32-bit number per pixel before the clock starts, the RGB picture
 is then freed, and NPP's stream context is made once: each library is timed on its own work. Memory is the peak
-GPU allocation of one more call, beyond each method's input (CV-CUDA allocates outside PyTorch and is not
-counted). Copies to and from the GPU depend on the machine's PCIe link, about 10 GB/s on the RTX 3070 here.
+GPU allocation of one more call, beyond each method's input. Copies to and from the GPU depend on the machine's PCIe link, about 10 GB/s on the RTX 3070 here.
 
 ## The machines and the files
 
 | folder | machine | what |
 |---|---|---|
-| `rtx3070/` | RTX 3070 8 GB, driver 580, CUDA 13.0, PyTorch 2.14.1, CuPy 14.2.0, NPP 13.0.1, cuCIM 26.10.0, CV-CUDA 0.19.0 | the published wheel, installed fresh: `tests.txt` (285 passed), `sheet.json` (sweep), `nvidia.json` (comparison), `e2e.json` (copies), `freeze.txt` (every package version); `warmup-check/`: the same comparison with a one-call warm-up, which left the GPU below its working clock at the smallest sizes |
+| `rtx3070/` | RTX 3070 8 GB, driver 580, CUDA 13.0, PyTorch 2.14.1, CuPy 14.2.0, NPP 13.0.1, cuCIM 26.10.0 | the published wheel, installed fresh: `tests.txt` (285 passed), `sheet.json` (sweep), `nvidia.json` (comparison), `e2e.json` (copies), `freeze.txt` (every package version); `warmup-check/`: the same comparison with a one-call warm-up, which left the GPU below its working clock at the smallest sizes |
 | `m5/` | Apple M5 Pro | `m5pro_sheet.json` (sweep), `e2e.json`, `tests.txt` (285 passed, colorcc 0.1.1 installed from PyPI) |
 | `a100-pcie/` | A100 PCIe 40 GB, driver 595, CUDA 13.2 | `sheet.json`, `e2e.json`, `nvidia.json`, `tests.txt`, from an earlier version of the package and of `nvidia.py` (which timed cuCIM through PyTorch's allocator); on one RTX 3070 that benchmark version's cuCIM ratios were within 1% at 200 to 600 dpi but up to 20% high at 50 and 100 dpi, so the A100's small-size ratios are approximate |
 | `rtx3070-profile/` | RTX 3070 | `layouts.json`: the join-order profile (`bench/profile.py`) behind "joining the row above first is about 10x faster" |

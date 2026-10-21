@@ -71,7 +71,7 @@ python examples/label_png.py drawing.png labels.png
 
 On an RTX 3070, with the picture already on the GPU, the full 806-megapixel drawing takes **89 ms**:
 
-<img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/benchmarks.png" alt="colorcc against NVIDIA cuCIM, NPP and CV-CUDA on an RTX 3070, at every size from 3 to 806 megapixels" width="100%">
+<img src="https://raw.githubusercontent.com/Acero-AI/colorcc/main/docs/benchmarks.png" alt="colorcc against NVIDIA cuCIM and NPP on an RTX 3070, at every size from 3 to 806 megapixels" width="100%">
 
 <sub>Interactive, with the A100 and the Apple M5 Pro against cc3d: <a href="https://blogs.fablnx.com/posts/every-colour/#vsall">Fig. 1 of the post</a>.</sub>
 
@@ -82,8 +82,7 @@ On an RTX 3070, with the picture already on the GPU, the full 806-megapixel draw
 | NVIDIA NPP `LabelMarkersUF` | 1.26 ms (**2.5x** slower), wrong labels | 1,176 ms (**24x** slower), wrong labels | buffer-size query overflows |
 
 The same sheet takes 151 ms on an Apple M5 Pro (17x faster than cc3d on one CPU core) and 49 ms on an A100.
-cuCIM gives the same regions in the same memory; NPP needs twice the memory and splits regions at every size it ran. NVIDIA's CV-CUDA only
-joins 4 neighbours, and there it is 1.6–1.9x *faster* than colorcc's 4-neighbour mode.
+cuCIM gives the same regions in the same memory; NPP needs twice the memory and splits regions at every size it ran. 
 
 > **Every number**, at every size, with the machines, versions and method: [`results/README.md`](https://github.com/Acero-AI/colorcc/blob/main/results/README.md).
 > The same data as live charts, with what each idea is worth: [chapter 9 of the post](https://blogs.fablnx.com/posts/every-colour/#c9).
@@ -173,7 +172,7 @@ The benchmarks (`pip install -e ".[cuda12,bench]"`):
 ```bash
 python bench/synth_sheet.py sheet.pdf
 python bench/bench.py sheet.pdf --out sheet.json                  # every flag, and cc3d, 50-800 dpi
-python bench/nvidia.py cache/sheet.pdf.*.npy --out nvidia.json    # vs NPP, cuCIM, CV-CUDA (whichever are installed)
+python bench/nvidia.py cache/sheet.pdf.*.npy --out nvidia.json    # vs NPP and cuCIM (whichever are installed)
 python bench/e2e.py cache/sheet.pdf.*.npy --out e2e.json          # with copies to and from the GPU
 python bench/tables.py                                            # the tables in results/README.md
 ```
