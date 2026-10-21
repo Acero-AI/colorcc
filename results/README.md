@@ -109,8 +109,8 @@ GPU allocation of one more call, beyond each method's input. Copies to and from 
 
 | folder | machine | what |
 |---|---|---|
-| `rtx3070/` | RTX 3070 8 GB, driver 580, CUDA 13.0, PyTorch 2.14.1, CuPy 14.2.0, NPP 13.0.1, cuCIM 26.10.0 | the published wheel, installed fresh: `tests.txt` (285 passed), `sheet.json` (sweep), `nvidia.json` (comparison), `e2e.json` (copies), `freeze.txt` (every package version); `warmup-check/`: the same comparison with a one-call warm-up, which left the GPU below its working clock at the smallest sizes |
-| `m5/` | Apple M5 Pro | `m5pro_sheet.json` (sweep), `e2e.json`, `tests.txt` (285 passed, colorcc 0.1.1 installed from PyPI) |
-| `a100/` | A100 SXM4 40 GB, driver 595, CUDA 13.2, PyTorch 2.14.1, CuPy 14.2.0, NPP 13.1.0, cuCIM 26.10.0 | colorcc 0.1.1 installed from PyPI, the same benchmark as the RTX 3070: `tests.txt` (285 passed), `sheet.json`, `nvidia.json`, `e2e.json`, `freeze.txt`, `machine.txt`, `progress.txt` |
+| `rtx3070/` | RTX 3070 8 GB, driver 580, CUDA 13.0, PyTorch 2.14.1, CuPy 14.2.0, NPP 13.0.1, cuCIM 26.10.0 | the published wheel, installed fresh: `tests.txt` (all passed), `sheet.json` (sweep), `nvidia.json` (comparison), `e2e.json` (copies), `freeze.txt` (every package version); `warmup-check/`: the same comparison with a one-call warm-up, which left the GPU below its working clock at the smallest sizes |
+| `m5/` | Apple M5 Pro | `m5pro_sheet.json` (sweep), `e2e.json`, `tests.txt` (all passed, colorcc 0.1.1 installed from PyPI) |
+| `a100/` | A100 SXM4 40 GB, driver 595, CUDA 13.2, PyTorch 2.14.1, CuPy 14.2.0, NPP 13.1.0, cuCIM 26.10.0 | colorcc 0.1.1 installed from PyPI, the same benchmark as the RTX 3070: `tests.txt` (all passed), `sheet.json`, `nvidia.json`, `e2e.json`, `freeze.txt`, `machine.txt`, `progress.txt` |
 | `rtx3070-profile/` | RTX 3070 | `layouts.json`: the join-order profile (`bench/profile.py`) behind "joining the row above first is about 10x faster" |
 | `earlier/` | two earlier RTX 3070 runs and an A100 PCIe run | before the pure-Python launcher and the fixed comparison; kept for the record |
