@@ -77,7 +77,7 @@ from the GPU. All times come from one synthetic, mostly white sheet:
 |---|---|---|---|
 | colorcc | 0.24 ms | 27.2 ms | 49.4 ms |
 | NVIDIA cuCIM `label()` | 4.65 ms (19x) | 85.6 ms (3.1x) | 131 ms (2.7x) |
-| NVIDIA NPP `LabelMarkersUF` | 0.65 ms (2.7x), [wrong labels](https://github.com/Acero-AI/npp-labelmarkers-bug) | 293 ms (11x), [wrong labels](https://github.com/Acero-AI/npp-labelmarkers-bug) | buffer-size query overflows |
+| NVIDIA NPP `LabelMarkersUF` | 0.65 ms (2.7x), [labels differ from cc3d](https://github.com/Acero-AI/npp-labelmarkers-bug) | 293 ms (11x), [labels differ from cc3d](https://github.com/Acero-AI/npp-labelmarkers-bug) | buffer-size query overflows |
 
 At 3 MP cuCIM's time is mostly a fixed per-call cost. cuCIM and NPP get the image already packed to 32 bits before
 their clock starts.
@@ -85,7 +85,7 @@ their clock starts.
 On the RTX 3070: cuCIM 1.7x to 5.4x slower, NPP 2.5x to 24x slower.
 
 The same sheet takes 151 ms on an Apple M5 Pro (232 ms with copies). cc3d, the CPU reference, takes 2.59 s on one core
-of the same Mac. cuCIM gives the same regions in the same memory; NPP needs twice the memory and splits regions at
+of the same Mac. cuCIM gives the same regions in the same memory; NPP needs twice the memory, and its labels differ from cc3d at
 every size it ran.
 
 > **Every number**, at every size, with the machines, versions and method: [`results/README.md`](https://github.com/Acero-AI/colorcc/blob/main/results/README.md).

@@ -17,7 +17,7 @@ With the picture already on the GPU:
 - **NVIDIA cuCIM** gives the same regions in the same GPU memory and is **2.7x to 19x slower** on the A100 (1.7x to
   5.4x on the RTX 3070): least on the full sheet, most on a 3-megapixel render, where its fixed per-call cost
   dominates. It also needs a 32-bit copy of a colour picture first; colorcc reads RGB.
-- **NVIDIA NPP** gave wrong labels at every size, used twice the memory, and was **2.7x to 11x slower** on the A100
+- **NVIDIA NPP** gave labels that differ from cc3d at every size, used twice the memory, and was **2.7x to 11x slower** on the A100
   (2.5x to 24x on the RTX 3070). At 806 megapixels its buffer-size query overflows.
 - NVIDIA CV-CUDA's `label` joins only 4 neighbours, which splits diagonal lines, so it is not compared.
 
@@ -68,7 +68,7 @@ On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core
 
 ### Against NVIDIA's libraries, A100 SXM4
 
-| dpi | MP | ours | cuCIM | cuCIM / ours | NPP (wrong labels) | NPP / ours | memory: ours | cuCIM | NPP |
+| dpi | MP | ours | cuCIM | cuCIM / ours | NPP (labels differ) | NPP / ours | memory: ours | cuCIM | NPP |
 |---|---|---|---|---|---|---|---|---|---|
 | 50 | 3 | 0.24 ms | 4.65 ms | 19.1x | 0.65 ms | 2.7x | 12.7 MB | 13.2 MB | 25.2 MB |
 | 100 | 13 | 0.85 ms | 6.73 ms | 7.9x | 3.27 ms | 3.8x | 50.6 MB | 51.3 MB | 100.8 MB |
@@ -80,7 +80,7 @@ On the Apple M5 Pro the sheet takes 151 ms, 17x faster than cc3d on one CPU core
 
 ### Against NVIDIA's libraries, RTX 3070
 
-| dpi | MP | ours | cuCIM | cuCIM / ours | NPP (wrong labels) | NPP / ours | memory: ours | cuCIM | NPP |
+| dpi | MP | ours | cuCIM | cuCIM / ours | NPP (labels differ) | NPP / ours | memory: ours | cuCIM | NPP |
 |---|---|---|---|---|---|---|---|---|---|
 | 50 | 3 | 0.50 ms | 2.73 ms | 5.4x | 1.26 ms | 2.5x | 12.7 MB | 13.2 MB | 25.2 MB |
 | 100 | 13 | 1.60 ms | 6.83 ms | 4.3x | 6.73 ms | 4.2x | 50.6 MB | 51.3 MB | 100.8 MB |

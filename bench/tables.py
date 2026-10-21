@@ -69,7 +69,7 @@ def main():
             body.append([str(g["dpi"]), f"{g['mpx']:.0f}", ms(o.get("time")), ms(c.get("time")), ratio(c, o),
                          ms(n.get("time")), ratio(n, o), mb(o.get("peak")), mb(c.get("peak")), mb(n.get("peak"))])
         out += [f"### Against NVIDIA's libraries, {gpu}", "",
-                table(["dpi", "MP", "ours", "cuCIM", "cuCIM / ours", "NPP (wrong labels)", "NPP / ours", "memory: ours", "cuCIM", "NPP"], body), ""]
+                table(["dpi", "MP", "ours", "cuCIM", "cuCIM / ours", "NPP (labels differ)", "NPP / ours", "memory: ours", "cuCIM", "NPP"], body), ""]
     print("\n".join(out))
 
 
