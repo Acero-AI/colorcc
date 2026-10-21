@@ -4,8 +4,8 @@
 
 **Connected components of every colour at once, on the GPU.**
 
-Labels every region of touching pixels with the same RGB value, in one pass. PyTorch tensors in and out, on CUDA
-and Apple Metal. Output identical to cc3d's.
+Exact labels for accountable AI, 2.7–19x faster than NVIDIA cuCIM and up to 11x faster than NVIDIA NPP on an A100.
+Every region of touching pixels with the same RGB value, in one pass, on CUDA and Apple Metal. Output identical to cc3d's.
 
 [![PyPI](https://img.shields.io/pypi/v/colorcc)](https://pypi.org/project/colorcc/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue)](https://pypi.org/project/colorcc/)
