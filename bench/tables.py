@@ -8,9 +8,9 @@ import json
 import pathlib
 
 R = pathlib.Path(__file__).resolve().parent.parent / "results"
-SWEEPS = {"Apple M5 Pro": "m5/m5pro_sheet.json", "RTX 3070": "rtx3070/sheet.json", "A100 PCIe": "a100-pcie/sheet.json"}
-COPIES = {"Apple M5 Pro": "m5/e2e.json", "RTX 3070": "rtx3070/e2e.json", "A100 PCIe": "a100-pcie/e2e.json"}
-LIBS = {"RTX 3070": ["rtx3070/nvidia.json"], "A100 PCIe": ["a100-pcie/nvidia.json"]}
+SWEEPS = {"Apple M5 Pro": "m5/m5pro_sheet.json", "RTX 3070": "rtx3070/sheet.json", "A100 SXM4": "a100/sheet.json"}
+COPIES = {"Apple M5 Pro": "m5/e2e.json", "RTX 3070": "rtx3070/e2e.json", "A100 SXM4": "a100/e2e.json"}
+LIBS = {"A100 SXM4": ["a100/nvidia.json"], "RTX 3070": ["rtx3070/nvidia.json"]}
 IDEAS = [("plain, first three stages", "gpu:base", "joins:base"), ("+ warp vote (runs)", "gpu:+runs", "joins:+runs"),
          ("+ skip joins", "gpu:+skip", "joins:+skip"), ("+ path halving", "gpu:+halve", "joins:+halve"),
          ("all three", "gpu:all-packed", "joins:all-packed"), ("+ numbering (the full call)", "gpu:all+n", None)]
@@ -68,8 +68,7 @@ def main():
             ratio = lambda a, b: f"{a['time'] / b['time']:.1f}x" if "time" in a and "time" in b else "–"
             body.append([str(g["dpi"]), f"{g['mpx']:.0f}", ms(o.get("time")), ms(c.get("time")), ratio(c, o),
                          ms(n.get("time")), ratio(n, o), mb(o.get("peak")), mb(c.get("peak")), mb(n.get("peak"))])
-        note = " (earlier benchmark; small-size ratios approximate)" if "A100" in gpu else ""
-        out += [f"### Against NVIDIA's libraries, {gpu}{note}", "",
+        out += [f"### Against NVIDIA's libraries, {gpu}", "",
                 table(["dpi", "MP", "ours", "cuCIM", "cuCIM / ours", "NPP (wrong labels)", "NPP / ours", "memory: ours", "cuCIM", "NPP"], body), ""]
     print("\n".join(out))
 

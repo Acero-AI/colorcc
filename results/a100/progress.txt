@@ -1,0 +1,9 @@
+[2026-10-21T01:27:09Z] install colorcc 0.1.1 from PyPI and cuCIM
+fa88ec8 README: benchmark image re-rendered
+[2026-10-21T01:40:00Z] tests against the installed wheel
+285 passed in 132.85s (0:02:12)
+[2026-10-21T01:42:14Z] synthetic sheet
+[2026-10-21T01:42:16Z] bench.py sweep
+[2026-10-21T02:03:26Z] nvidia.py comparison
+[2026-10-21T02:10:54Z] e2e.py
+[2026-10-21T02:12:10Z] done
