@@ -71,14 +71,14 @@ python examples/label_png.py drawing.png labels.png
 
 On an RTX 3070, with the picture already on the GPU, the full 806-megapixel drawing takes **89 ms**:
 
-| | 3 MP render | 806 MP sheet |
-|---|---|---|
-| colorcc | 0.50 ms | 88.9 ms |
-| NVIDIA cuCIM `label()` | 2.73 ms (**5.4x** slower) | 151 ms (**1.7x** slower) |
-| NVIDIA NPP `LabelMarkersUF` | wrong labels, **2x** the memory | buffer-size query overflows |
+| | 3 MP render | 454 MP (600 dpi) | 806 MP sheet |
+|---|---|---|---|
+| colorcc | 0.50 ms | 49.6 ms | 88.9 ms |
+| NVIDIA cuCIM `label()` | 2.73 ms (**5.4x** slower) | 91.9 ms (**1.9x** slower) | 151 ms (**1.7x** slower) |
+| NVIDIA NPP `LabelMarkersUF` | 1.26 ms (**2.5x** slower), wrong labels | 1,176 ms (**24x** slower), wrong labels | buffer-size query overflows |
 
 The same sheet takes 151 ms on an Apple M5 Pro (17x faster than cc3d on one CPU core) and 49 ms on an A100.
-cuCIM gives the same regions in the same memory; NPP splits regions at every size it ran. NVIDIA's CV-CUDA only
+cuCIM gives the same regions in the same memory; NPP needs twice the memory and splits regions at every size it ran. NVIDIA's CV-CUDA only
 joins 4 neighbours, and there it is 1.6–1.9x *faster* than colorcc's 4-neighbour mode.
 
 > **Every number**, at every size, with the machines, versions and method: [`results/README.md`](https://github.com/Acero-AI/colorcc/blob/main/results/README.md).
@@ -137,7 +137,7 @@ Flags (combine with `|`):
 of 40 measurements (all 14 on the M5 Pro, all 12 on the RTX 3070, 13 of 14 on
 the A100, which was 1.3x faster at 600 dpi with the paper ignored), by up to 38%,
 and it doubles the memory. On its own, without the other switches, it was
-faster about as often as slower. The flags exist so each idea can be
+faster in only 14 of 40. The flags exist so each idea can be
 measured on its own; every combination gives the same labels.
 
 `colorcc.reference` has CPU versions (cc3d, and one OpenCV call per colour)
